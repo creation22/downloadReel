@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-label="From SD to 4K: how video resolutions actually evolved">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#064e3b"/>
+      <stop offset="1" stop-color="#0d9488"/>
+    </linearGradient>
+    <linearGradient id="fade" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#000" stop-opacity="0"/>
+      <stop offset="1" stop-color="#000" stop-opacity="0.55"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#g)"/>
+  <g opacity="0.16" fill="none" stroke="#ffffff" stroke-width="1.5">
+    <circle cx="293" cy="232" r="303"/>
+    <circle cx="293" cy="232" r="218.16"/>
+    <circle cx="1053.5" cy="514" r="84"/>
+  </g>
+  <g opacity="0.5">
+    <circle cx="293" cy="232" r="6" fill="#fbbf24"/>
+    <circle cx="1053.5" cy="514" r="4" fill="#34d399"/>
+  </g>
+  <g transform="translate(64 64)">
+    <rect width="72" height="72" rx="18" fill="#ffffff" opacity="0.14"/>
+    <path d="M28 22 L52 36 L28 50 Z" fill="#ffffff" opacity="0.9"/>
+  </g>
+  <text x="64" y="180" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="24" letter-spacing="6" fill="#ffffff" opacity="0.85">DOWNLOADREEL · FORMATS</text>
+  <rect x="64" y="428" width="72" height="6" rx="3" fill="#fbbf24"/>
+  <text x="64" y="486" font-family="'Segoe UI', Arial, sans-serif" font-size="46" font-weight="700" fill="#ffffff">From SD to 4K: how video</text>
+  <text x="64" y="538" font-family="'Segoe UI', Arial, sans-serif" font-size="46" font-weight="700" fill="#ffffff">resolutions actually</text>
+  <text x="64" y="590" font-family="'Segoe UI', Arial, sans-serif" font-size="46" font-weight="700" fill="#ffffff">evolved</text>
+</svg>

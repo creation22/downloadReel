@@ -1,0 +1,126 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "DM Sans", "DM Sans Fallback", ui-sans-serif, system-ui,
+    -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas,
+    monospace;
+
+  --animate-page-in: page-in 200ms ease-out both;
+  --animate-fade-up: fade-up 350ms ease-out both;
+  --animate-fade-in: fade-in 250ms ease-out both;
+
+  @keyframes page-in {
+    from {
+      opacity: 0;
+      transform: translateY(4px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  @keyframes fade-up {
+    from {
+      opacity: 0;
+      transform: translateY(8px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+}
+
+/*
+ * Semantic design tokens. Dark is the default; adding the `light`
+ * class on <html> switches the whole system. Utilities are generated
+ * via `@theme inline` so they reference the vars at runtime.
+ */
+:root {
+  color-scheme: dark;
+  --canvas: #09090b;
+  --surface: #101013;
+  --surface-2: #17171b;
+  --line: #232329;
+  --line-strong: #3a3a42;
+  --fg: #fafafa;
+  --muted: #a1a1aa;
+  --faint: #6e6e77;
+  --accent: #34d399;
+  --ok: #34d399;
+  --danger: #f87171;
+  --btn: #fafafa;
+  --btn-fg: #09090b;
+  --btn-hover: #dcdce0;
+}
+
+:root.light {
+  color-scheme: light;
+  --canvas: #fafafa;
+  --surface: #ffffff;
+  --surface-2: #f4f4f5;
+  --line: #e4e4e7;
+  --line-strong: #cfcfd6;
+  --fg: #18181b;
+  --muted: #52525b;
+  --faint: #8b8b94;
+  --accent: #059669;
+  --ok: #059669;
+  --danger: #dc2626;
+  --btn: #18181b;
+  --btn-fg: #fafafa;
+  --btn-hover: #2d2d33;
+}
+
+@theme inline {
+  --color-canvas: var(--canvas);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+  --color-fg: var(--fg);
+  --color-muted: var(--muted);
+  --color-faint: var(--faint);
+  --color-accent: var(--accent);
+  --color-ok: var(--ok);
+  --color-danger: var(--danger);
+  --color-btn: var(--btn);
+  --color-btn-fg: var(--btn-fg);
+  --color-btn-hover: var(--btn-hover);
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    font-family: var(--font-sans);
+    background-color: var(--canvas);
+    color: var(--fg);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  ::selection {
+    background: color-mix(in oklab, var(--accent) 30%, transparent);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

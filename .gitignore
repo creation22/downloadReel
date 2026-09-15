@@ -1,0 +1,26 @@
+# dependencies
+node_modules/
+
+# build output
+dist/
+build/
+
+# logs
+*.log
+
+# local env (example is committed instead)
+.env
+
+# vendored download-engine binaries (too large for GitHub, platform-specific).
+# Install yt-dlp + ffmpeg on your machine instead — see README.
+server/bin/
+
+# private login sessions for the download API (never commit these)
+server/cookies.txt
+COOKIES_FILE
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

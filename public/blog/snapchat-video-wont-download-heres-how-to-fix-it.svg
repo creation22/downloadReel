@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-label="Snapchat video won&apos;t download? Here&apos;s how to fix it">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0c4a6e"/>
+      <stop offset="1" stop-color="#0891b2"/>
+    </linearGradient>
+    <linearGradient id="fade" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#000" stop-opacity="0"/>
+      <stop offset="1" stop-color="#000" stop-opacity="0.55"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#g)"/>
+  <g opacity="0.16" fill="none" stroke="#ffffff" stroke-width="1.5">
+    <circle cx="230" cy="322" r="260"/>
+    <circle cx="230" cy="322" r="187.2"/>
+    <circle cx="1085" cy="469" r="132"/>
+  </g>
+  <g opacity="0.5">
+    <circle cx="230" cy="322" r="3" fill="#fbbf24"/>
+    <circle cx="1085" cy="469" r="4" fill="#fbbf24"/>
+  </g>
+  <g transform="translate(64 64)">
+    <rect width="72" height="72" rx="18" fill="#ffffff" opacity="0.14"/>
+    <path d="M28 22 L52 36 L28 50 Z" fill="#ffffff" opacity="0.9"/>
+  </g>
+  <text x="64" y="180" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="24" letter-spacing="6" fill="#ffffff" opacity="0.85">DOWNLOADREEL · DOWNLOADERS</text>
+  <rect x="64" y="428" width="72" height="6" rx="3" fill="#fbbf24"/>
+  <text x="64" y="486" font-family="'Segoe UI', Arial, sans-serif" font-size="46" font-weight="700" fill="#ffffff">Snapchat video won&apos;t</text>
+  <text x="64" y="538" font-family="'Segoe UI', Arial, sans-serif" font-size="46" font-weight="700" fill="#ffffff">download? Here&apos;s how to fix</text>
+  <text x="64" y="590" font-family="'Segoe UI', Arial, sans-serif" font-size="46" font-weight="700" fill="#ffffff">it</text>
+</svg>
