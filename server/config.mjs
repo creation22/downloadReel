@@ -65,7 +65,7 @@ export const DOWNLOAD_TIMEOUT_MS = Number(process.env.DOWNLOAD_TIMEOUT_SECONDS |
 // MAX_VIDEO_DURATION_SECONDS: rejects server-side downloads longer than
 // this (reels-focused service). Checked in /api/info (exact duration)
 // and enforced inside the single yt-dlp process via --match-filter.
-export const MAX_VIDEO_DURATION_SECONDS = num(process.env.MAX_VIDEO_DURATION_SECONDS, 180);
+export const MAX_VIDEO_DURATION_SECONDS = num(process.env.MAX_VIDEO_DURATION_SECONDS, 600);
 // MAX_DOWNLOAD_SIZE_MB: generous VPS safety cap for server-side files.
 // Enforced during the download via yt-dlp --max-filesize, estimated
 // up-front in /api/info, and verified on the finished file. The
