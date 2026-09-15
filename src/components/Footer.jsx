@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Github } from "lucide-react";
+import { GithubLogo } from "@phosphor-icons/react";
 import { SITE } from "../lib/site";
 import { Logo } from "./Logo";
 import { Container } from "./Container";
@@ -48,9 +48,9 @@ export function Footer() {
             aria-label="GitHub repository"
             className="text-muted transition-colors duration-150 hover:text-fg"
           >
-            <Github className="h-4 w-4" />
+            <GithubLogo className="h-4 w-4" />
           </a>
-          <p className="font-mono text-xs text-faint">© 2026 downloadReel</p>
+          <p className="font-mono text-xs text-faint">© 2026 DownloadReel</p>
         </div>
       </Container>
     </footer>

@@ -1,12 +1,17 @@
+import { createElement } from "react";
 import {
   FileVideo,
-  Film,
-  AudioLines,
-  SlidersVertical,
+  FilmSlate,
+  Waveform,
+  Faders,
   Gauge,
-  FileCog,
-  SunMedium,
-} from "lucide-react";
+  Cpu,
+  SunHorizon,
+} from "@phosphor-icons/react";
+
+/** Wrap a Phosphor icon so it always renders in the duotone weight. */
+const duotone = (Icon) => (props) =>
+  createElement(Icon, { weight: "duotone", ...props });
 
 /**
  * Central converter registry.
@@ -38,7 +43,7 @@ function formatConverter({ slug, from, fromExts, to, toExt, note }) {
     category: "convert",
     name: `${F} to ${T} Converter`,
     title: `${F} to ${T} Converter`,
-    heading: `${from} to ${to} converter`,
+    heading: `${F} to ${T} Converter`,
     tagline: `Convert ${F} videos to ${T} directly in your browser.`,
     description: `Convert ${F} videos to ${T} directly in your browser — no uploads, no signup. ${F} in, ${T} out, nothing to configure.`,
     preset: {
@@ -87,7 +92,7 @@ function formatConverter({ slug, from, fromExts, to, toExt, note }) {
           ]),
       output,
     ],
-    icon: FileVideo,
+    icon: duotone(FileVideo),
     whatIs: [
       `The ${F} to ${T} converter turns ${F} video files into ${T} files locally in your browser. The preset is fixed — ${F} in, ${T} out — so there's nothing to configure.`,
       note,
@@ -120,7 +125,7 @@ function audioConverter({ slug, format, note, qualityAnswer, codecArgs }) {
     category: "audio",
     name: `Video to ${F} Converter`,
     title: `Video to ${F} Converter`,
-    heading: `video to ${format} converter`,
+    heading: `Video to ${F} Converter`,
     tagline: `Extract the audio from a video and save it as ${F} — right in your browser.`,
     description: `Extract audio from a video file and save it as ${F} directly in your browser — no uploads, no signup.`,
     preset: {
@@ -133,7 +138,7 @@ function audioConverter({ slug, format, note, qualityAnswer, codecArgs }) {
     outputLabel: `.${format}`,
     outputExt: format,
     buildArgs: (input, output) => ["-i", input, ...codecArgs, output],
-    icon: AudioLines,
+    icon: duotone(Waveform),
     whatIs: [
       `The video to ${F} converter pulls the audio track out of a video file and saves it as ${F}, locally in your browser. Only the audio is kept — the video track is discarded.`,
       note,
@@ -163,7 +168,7 @@ function downscaleConverter({ slug, name, fromRes, toRes, why }) {
     category: "convert",
     name,
     title: name,
-    heading: name.toLowerCase(),
+    heading: name,
     tagline: `Downscale ${fromRes} videos to ${toRes} directly in your browser.`,
     description: `Downscale ${fromRes} videos to ${toRes} directly in your browser — no uploads, no signup. ${fromRes} in, ${toRes} out, nothing to configure.`,
     preset: { input: "any common video", output: toRes, mode: "downscale" },
@@ -190,7 +195,7 @@ function downscaleConverter({ slug, name, fromRes, toRes, why }) {
       "+faststart",
       output,
     ],
-    icon: SlidersVertical,
+    icon: duotone(Faders),
     whatIs: [
       `The ${name.toLowerCase()} downscales ${fromRes} video to ${toRes} locally in your browser. The preset is fixed — ${fromRes} in, ${toRes} out.`,
       why,
@@ -224,7 +229,7 @@ function fpsConverter({ slug, fromFps, toFps, why, smoothAnswer }) {
     category: "convert",
     name,
     title: name,
-    heading: `${fromFps} to ${toFps} converter`,
+    heading: `${fromFps} to ${toFps} Converter`,
     tagline: `Convert video from ${fromFps} to ${toFps} directly in your browser.`,
     description: `Convert video from ${fromFps} to ${toFps} directly in your browser — no uploads, no signup. ${fromFps} in, ${toFps} out, nothing to configure.`,
     preset: { input: "any common video", output: toFps, mode: "frame rate conversion" },
@@ -251,7 +256,7 @@ function fpsConverter({ slug, fromFps, toFps, why, smoothAnswer }) {
       "+faststart",
       output,
     ],
-    icon: SlidersVertical,
+    icon: duotone(Faders),
     whatIs: [
       `The ${fromFps} to ${toFps} converter changes the frame rate of a video locally in your browser. The preset is fixed — ${fromFps} in, ${toFps} out.`,
       why,
@@ -308,7 +313,7 @@ const raw = [
     category: "creator",
     name: "Video to GIF Converter",
     title: "Video to GIF Converter",
-    heading: "video to gif converter",
+    heading: "Video to GIF Converter",
     tagline: "Turn a short video clip into a looping GIF — right in your browser.",
     description:
       "Turn a video clip into an animated GIF directly in your browser — no uploads, no signup. Video in, looping GIF out.",
@@ -326,7 +331,7 @@ const raw = [
       "[out]",
       output,
     ],
-    icon: Film,
+    icon: duotone(FilmSlate),
     whatIs: [
       "The video to GIF converter turns a short video clip into an animated GIF locally in your browser. The preset is fixed — video in, looping GIF out.",
       "GIFs play anywhere images do and loop automatically, which makes them a simple way to share short, silent moments.",
@@ -426,7 +431,7 @@ const raw = [
     category: "compress",
     name: "Video Bitrate Converter",
     title: "Video Bitrate Converter",
-    heading: "video bitrate converter",
+    heading: "Video Bitrate Converter",
     tagline: "Lower the bitrate of a video to shrink its file size — right in your browser.",
     description:
       "Adjust the bitrate of a video to reduce its file size directly in your browser — no uploads, no signup.",
@@ -452,7 +457,7 @@ const raw = [
       "+faststart",
       output,
     ],
-    icon: Gauge,
+    icon: duotone(Gauge),
     whatIs: [
       "The video bitrate converter lowers the bitrate of a video to shrink its file size, locally in your browser. Format and resolution stay the same.",
       "Bitrate is how much data a video uses per second — less bitrate means a smaller file, at some cost to detail.",
@@ -480,7 +485,7 @@ const raw = [
     group: "quality",
     name: "Video Codec Converter",
     title: "Video Codec Converter",
-    heading: "video codec converter",
+    heading: "Video Codec Converter",
     tagline: "Re-encode a video to H.264 for maximum compatibility — right in your browser.",
     description:
       "Re-encode a video to the widely supported H.264 codec directly in your browser — no uploads, no signup.",
@@ -506,7 +511,7 @@ const raw = [
       "+faststart",
       output,
     ],
-    icon: FileCog,
+    icon: duotone(Cpu),
     whatIs: [
       "The video codec converter re-encodes video to H.264 — the codec nearly every player and device supports — locally in your browser.",
       "If a video won't play on an older device or player, re-encoding to H.264 is the most common fix.",
@@ -534,7 +539,7 @@ const raw = [
     group: "quality",
     name: "HDR to SDR Converter",
     title: "HDR to SDR Converter",
-    heading: "hdr to sdr converter",
+    heading: "HDR to SDR Converter",
     tagline: "Tone-map HDR video to standard dynamic range — right in your browser.",
     description:
       "Tone-map HDR video to SDR directly in your browser — no uploads, no signup. Works where the source allows it.",
@@ -584,7 +589,7 @@ const raw = [
         output,
       ];
     },
-    icon: SunMedium,
+    icon: duotone(SunHorizon),
     whatIs: [
       "The HDR to SDR converter tone-maps HDR video to standard dynamic range, locally in your browser. This makes HDR footage watchable on ordinary SDR screens.",
       "Tone mapping works where the source allows it — results vary between videos, and some of the HDR look is unavoidably lost.",

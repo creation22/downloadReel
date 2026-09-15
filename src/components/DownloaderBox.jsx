@@ -1,6 +1,6 @@
 import { useMemo, useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import { AlertCircle, Check, Download, Loader2, X } from "lucide-react";
+import { WarningCircle, Check, Download, Spinner, X } from "@phosphor-icons/react";
 import { detectPlatform, DETECT_ERRORS } from "../lib/detect";
 import { downloadVideo, STAGE_LABELS } from "../services/downloader";
 import { formatBytes, formatDuration } from "../lib/utils";
@@ -201,7 +201,7 @@ export function DownloaderBox({ platform = null }) {
 
       {status === "error" && error && (
         <div className="mt-3 flex animate-fade-in items-start gap-2 text-sm text-danger">
-          <AlertCircle className="mt-0.5 h-4 w-4 shrink-0" />
+          <WarningCircle className="mt-0.5 h-4 w-4 shrink-0" />
           <p>
             {error.message}
             {error.linkTo && (
@@ -336,7 +336,7 @@ export function DownloaderBox({ platform = null }) {
                   >
                     {dlState === "downloading" ? (
                       <>
-                        <Loader2 className="h-4 w-4 animate-spin" />
+                        <Spinner className="h-4 w-4 animate-spin" />
                         {progress?.total
                           ? `Downloading… ${Math.min(100, Math.floor((progress.loaded / progress.total) * 100))}%`
                           : "Downloading…"}
@@ -348,7 +348,7 @@ export function DownloaderBox({ platform = null }) {
                       </>
                     ) : (
                       <>
-                        <Download className="h-4 w-4" />
+                        <Download weight="duotone" className="h-4 w-4" />
                         {dlState === "error"
                           ? "Retry download"
                           : "Download video"}
@@ -422,7 +422,7 @@ export function DownloaderBox({ platform = null }) {
 
                 {dlState === "error" && (
                   <p className="mt-2 flex animate-fade-in items-center gap-1.5 text-xs text-danger">
-                    <AlertCircle className="h-3.5 w-3.5" />
+                    <WarningCircle className="h-3.5 w-3.5" />
                     The download was interrupted. Check your connection and
                     retry.
                   </p>
@@ -437,7 +437,7 @@ export function DownloaderBox({ platform = null }) {
                   title="No download API is configured in this build"
                   className="inline-flex h-10 cursor-not-allowed items-center justify-center gap-2 rounded-md bg-btn px-5 text-sm font-medium text-btn-fg opacity-40"
                 >
-                  <Download className="h-4 w-4" />
+                  <Download weight="duotone" className="h-4 w-4" />
                   Download video
                 </button>
                 <p className="text-xs leading-relaxed text-faint">

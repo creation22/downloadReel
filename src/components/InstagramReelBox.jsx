@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { AlertCircle, Check, Download } from "lucide-react";
+import { WarningCircle, Check, Download } from "@phosphor-icons/react";
 import { toast } from "sonner";
 import {
   INSTAGRAM_STAGE_LABELS,
@@ -173,7 +173,7 @@ export function InstagramReelBox() {
               rel="noreferrer"
               className="inline-flex h-9 shrink-0 items-center justify-center gap-2 rounded-md bg-btn px-4 text-sm font-medium text-btn-fg transition-colors duration-150 hover:bg-btn-hover"
             >
-              <Download className="h-4 w-4" />
+              <Download weight="duotone" className="h-4 w-4" />
               Download
             </a>
           </div>
@@ -221,7 +221,7 @@ export function InstagramReelBox() {
 
       {status === "error" && error && (
         <div className="mt-3 flex animate-fade-in items-start gap-2 rounded-md bg-danger/10 p-3 text-sm text-danger">
-          <AlertCircle className="mt-0.5 h-4 w-4 shrink-0" />
+          <WarningCircle className="mt-0.5 h-4 w-4 shrink-0" />
           <p>{error}</p>
         </div>
       )}

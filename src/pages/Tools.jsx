@@ -7,9 +7,9 @@ import { ToolDirectory } from "../components/ToolDirectory";
 
 export default function Tools() {
   usePageMeta({
-    title: "All Tools | downloadReel",
+    title: "All Tools | DownloadReel",
     description:
-      "The full downloadReel tool directory — video downloaders, video converters and upcoming tools.",
+      "The full DownloadReel tool directory — video downloaders, video converters and upcoming tools.",
   });
 
   const [searchParams] = useSearchParams();
@@ -31,10 +31,10 @@ export default function Tools() {
             directory
           </p>
           <h1 className="mt-2 text-2xl font-semibold tracking-tight text-fg sm:text-3xl">
-            all tools
+            All Tools
           </h1>
           <p className="mt-3 text-sm leading-relaxed text-muted">
-            Every downloadReel tool in one place — downloaders, converters and
+            Every DownloadReel tool in one place — downloaders, converters and
             what's on the roadmap. Press{" "}
             <kbd className="rounded border border-line bg-surface px-1.5 py-0.5 font-mono text-[10px] text-faint">
               /

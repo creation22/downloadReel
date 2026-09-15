@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Laptop } from "lucide-react";
+import { Laptop } from "@phosphor-icons/react";
 import { usePageMeta } from "../lib/seo";
 import { platforms } from "../data/platforms";
 import { tools, toolCategories } from "../data/tools";
@@ -26,7 +26,7 @@ const metaChip =
 
 export default function Home() {
   usePageMeta({
-    title: "downloadReel — download, convert and edit videos in your browser",
+    title: "DownloadReel — download, convert and edit videos in your browser",
     description:
       "Everything you need to download, convert and edit videos — right in your browser. Free, no signup, local processing.",
   });
@@ -39,16 +39,36 @@ export default function Home() {
   return (
     <>
       {/* Hero */}
-      <section className="pb-12 pt-14 sm:pb-14 sm:pt-20">
-        <Container>
-          <div className="mx-auto max-w-2xl text-center">
+      <section className="relative overflow-hidden pb-12 pt-14 sm:pb-14 sm:pt-20">
+        {/* social platform SVGs scattered in hero background */}
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0"
+        >
+          <PlatformIcon slug="instagram" size={34} className="absolute left-[6%] top-[12%] -rotate-12 opacity-[0.16]" />
+          <PlatformIcon slug="tiktok" size={30} className="absolute right-[8%] top-[10%] rotate-12 opacity-[0.16]" />
+          <PlatformIcon slug="x" size={54} className="absolute left-[21%] top-[56%] rotate-6 opacity-[0.24]" />
+          <PlatformIcon slug="facebook" size={56} className="absolute right-[21%] top-[56%] -rotate-6 opacity-[0.24]" />
+          <PlatformIcon slug="reddit" size={28} className="absolute bottom-[16%] left-[8%] rotate-12 opacity-[0.14]" />
+          <PlatformIcon slug="pinterest" size={26} className="absolute bottom-[18%] right-[9%] -rotate-12 opacity-[0.14]" />
+          <PlatformIcon slug="vimeo" size={30} className="absolute left-[22%] top-[8%] rotate-6 opacity-10 max-sm:hidden" />
+          <PlatformIcon slug="twitch" size={28} className="absolute right-[22%] top-[6%] -rotate-6 opacity-10 max-sm:hidden" />
+          <PlatformIcon slug="threads" size={24} className="absolute bottom-[30%] left-[4%] -rotate-6 opacity-10 max-md:hidden" />
+          <PlatformIcon slug="snapchat" size={26} className="absolute bottom-[32%] right-[4%] rotate-6 opacity-10 max-md:hidden" />
+          <PlatformIcon slug="linkedin" size={24} className="absolute left-[30%] top-[22%] -rotate-12 opacity-[0.08] max-lg:hidden" />
+        </div>
+        <Container className="relative">
+          <div className="mx-auto max-w-3xl text-center">
             <p className="animate-fade-up inline-flex items-center gap-2 rounded-full border border-line bg-surface px-3 py-1 font-mono text-[11px] text-muted">
               <span className="h-1.5 w-1.5 rounded-full bg-accent" />
               open source · local processing
             </p>
-            <h1 className="animate-fade-up [animation-delay:60ms] mt-5 text-2xl font-bold leading-[1.2] tracking-tight text-fg sm:text-4xl sm:leading-[1.15]">
-              Everything you need to download, convert and edit videos right
-              in your browser.
+            <h1 className="animate-fade-up [animation-delay:60ms] mt-5 font-display text-[34px] font-extrabold leading-[1.05] tracking-tight text-fg sm:text-[52px] sm:leading-[1.0] lg:text-[74px] lg:leading-[70px]">
+              Everything you need to{" "}
+              <span className="font-serif font-normal italic text-[#ed5526]">
+                download, convert and edit
+              </span>{" "}
+              videos right in your browser.
             </h1>
 
             <div className="animate-fade-up [animation-delay:180ms] mx-auto mt-8 max-w-xl text-left">
@@ -81,7 +101,7 @@ export default function Home() {
         <Container>
           <SectionHeading
             eyebrow="start here"
-            title="popular tools"
+            title="Popular Tools"
             description="The most-used downloaders and converters."
           />
           <ToolGrid tools={popular} className="mt-8" />
@@ -93,7 +113,7 @@ export default function Home() {
         <Container>
           <SectionHeading
             eyebrow="browse"
-            title="by category"
+            title="By Category"
             description={`${tools.length} tools across ${categories.length} categories.`}
           />
           <div className="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">
@@ -122,7 +142,7 @@ export default function Home() {
         <Container>
           <SectionHeading
             eyebrow="directory"
-            title="all tools"
+            title="All Tools"
             description="Search the full directory — press / to jump to the search field."
           />
           <div className="mt-8">
@@ -136,7 +156,7 @@ export default function Home() {
         <Container>
           <SectionHeading
             eyebrow="learn"
-            title="from the blog"
+            title="From the Blog"
             description={`${blogPostCount} guides on formats, codecs, downloading and video workflows.`}
           />
           <div className="mt-8 grid gap-4 sm:grid-cols-3">
@@ -181,7 +201,7 @@ export default function Home() {
         <Container>
           <div className="flex flex-col gap-6 rounded-lg border border-line bg-surface p-6 sm:flex-row sm:items-center sm:gap-8 sm:p-8">
             <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-md border border-line bg-canvas text-accent">
-              <Laptop className="h-5 w-5" />
+              <Laptop weight="duotone" className="h-5 w-5" />
             </div>
             <div>
               <h2 className="text-lg font-semibold tracking-tight text-fg sm:text-xl">

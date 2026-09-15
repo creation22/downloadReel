@@ -13,7 +13,6 @@ const raw = [
     category: "social",
     toolName: "X video downloader",
     title: "X Video Downloader",
-    heading: "X video downloader",
     tagline: "Download videos from X using a simple link.",
     description:
       "Download videos from X using a simple link. Paste a public post URL and prepare the video for download.",
@@ -52,7 +51,6 @@ const raw = [
     category: "social",
     toolName: "Instagram video downloader",
     title: "Instagram Video Downloader",
-    heading: "Instagram video downloader",
     tagline: "Download videos from Instagram using a simple link.",
     description:
       "Download Reels and feed videos from public Instagram posts. Paste a link and prepare the video for download.",
@@ -97,7 +95,6 @@ const raw = [
     category: "social",
     toolName: "TikTok video downloader",
     title: "TikTok Video Downloader",
-    heading: "TikTok video downloader",
     tagline: "Download videos from TikTok using a simple link.",
     description:
       "Download videos from public TikTok posts using a simple link. Paste a URL and prepare the video for download.",
@@ -140,7 +137,6 @@ const raw = [
     category: "social",
     toolName: "Facebook video downloader",
     title: "Facebook Video Downloader",
-    heading: "Facebook video downloader",
     tagline: "Download videos from Facebook using a simple link.",
     description:
       "Download videos from public Facebook posts, Reels and Watch using a simple link.",
@@ -183,7 +179,6 @@ const raw = [
     category: "social",
     toolName: "Reddit video downloader",
     title: "Reddit Video Downloader",
-    heading: "Reddit video downloader",
     tagline: "Download videos from Reddit using a simple link.",
     description:
       "Download videos hosted on Reddit using a simple link. Paste a post URL and prepare the video for download.",
@@ -225,7 +220,6 @@ const raw = [
     category: "social",
     toolName: "Pinterest video downloader",
     title: "Pinterest Video Downloader",
-    heading: "Pinterest video downloader",
     tagline: "Download videos from Pinterest using a simple link.",
     description:
       "Download video pins from public Pinterest boards using a simple link.",
@@ -267,7 +261,6 @@ const raw = [
     category: "video",
     toolName: "Vimeo video downloader",
     title: "Vimeo Video Downloader",
-    heading: "Vimeo video downloader",
     tagline: "Download videos from Vimeo using a simple link.",
     description:
       "Download videos from public Vimeo posts using a simple link. Paste a URL and prepare the video for download.",
@@ -309,7 +302,6 @@ const raw = [
     category: "social",
     toolName: "Threads video downloader",
     title: "Threads Video Downloader",
-    heading: "Threads video downloader",
     tagline: "Download videos from Threads using a simple link.",
     description:
       "Download videos from public Threads posts using a simple link. Paste a URL and prepare the video for download.",
@@ -351,7 +343,6 @@ const raw = [
     category: "social",
     toolName: "Snapchat video downloader",
     title: "Snapchat Video Downloader",
-    heading: "Snapchat video downloader",
     tagline: "Download videos from Snapchat using a simple link.",
     description:
       "Download Spotlight and public story videos from Snapchat using a simple link.",
@@ -393,7 +384,6 @@ const raw = [
     category: "social",
     toolName: "LinkedIn video downloader",
     title: "LinkedIn Video Downloader",
-    heading: "LinkedIn video downloader",
     tagline: "Download videos from LinkedIn using a simple link.",
     description:
       "Download videos from public LinkedIn posts using a simple link. Paste a URL and prepare the video for download.",
@@ -435,7 +425,6 @@ const raw = [
     category: "video",
     toolName: "Twitch clip downloader",
     title: "Twitch Clip Downloader",
-    heading: "Twitch clip downloader",
     tagline: "Download clips and videos from Twitch using a simple link.",
     description:
       "Download clips and videos from public Twitch channels using a simple link.",
@@ -476,6 +465,7 @@ const raw = [
 
 export const platforms = raw.map((p) => ({
   ...p,
+  heading: p.title,
   href: `/${p.slug}-video-downloader`,
 }));
 

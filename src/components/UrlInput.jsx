@@ -1,4 +1,4 @@
-import { Link2, Loader2 } from "lucide-react";
+import { Link, Spinner } from "@phosphor-icons/react";
 import { cn } from "../lib/utils";
 
 /**
@@ -54,7 +54,7 @@ export function UrlInput({
           "disabled:cursor-not-allowed disabled:opacity-50"
         )}
       >
-        {loading && <Loader2 className="h-4 w-4 animate-spin" />}
+        {loading && <Spinner className="h-4 w-4 animate-spin" />}
         {loading ? "Working..." : buttonLabel}
       </button>
     </form>
@@ -63,5 +63,5 @@ export function UrlInput({
 
 /** Neutral icon shown when no platform has been detected yet. */
 export function LinkIcon() {
-  return <Link2 className="h-[18px] w-[18px]" />;
+  return <Link className="h-[18px] w-[18px]" />;
 }

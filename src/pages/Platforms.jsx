@@ -7,9 +7,9 @@ import { ToolGrid } from "../components/ToolGrid";
 
 export default function Platforms() {
   usePageMeta({
-    title: "Video Downloaders | downloadReel",
+    title: "Video Downloaders | DownloadReel",
     description:
-      "Every supported platform on downloadReel — dedicated video downloader pages for X, Instagram, TikTok and more.",
+      "Every supported platform on DownloadReel — dedicated video downloader pages for X, Instagram, TikTok and more.",
   });
 
   const tools = platforms.map(platformToTool);
@@ -26,7 +26,7 @@ export default function Platforms() {
             directory · {platforms.length} platforms
           </p>
           <h1 className="mt-2 text-2xl font-semibold tracking-tight text-fg sm:text-3xl">
-            video downloaders
+            Video Downloaders
           </h1>
           <p className="mt-3 text-sm leading-relaxed text-muted">
             Every platform downloader in one place. Paste a link on the

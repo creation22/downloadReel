@@ -1,5 +1,5 @@
 /**
- * downloadReel download API — local extraction service wrapping yt-dlp.
+ * DownloadReel download API — local extraction service wrapping yt-dlp.
  */
 
 import http from "node:http";
@@ -45,7 +45,7 @@ const server = http.createServer(async (req, res) => {
 });
 
 server.listen(PORT, () => {
-  console.log(`downloadReel download API -> http://localhost:${PORT}`);
+  console.log(`DownloadReel download API -> http://localhost:${PORT}`);
   console.log(`yt-dlp binary: ${YTDLP}`);
   console.log(`ffmpeg binary: ${FFMPEG}`);
 

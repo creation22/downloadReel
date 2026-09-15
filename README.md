@@ -1,4 +1,4 @@
-# downloadReel
+# DownloadReel
 
 Download Reels and videos from Instagram, TikTok, X and more — right in your browser. Free, no signup, local processing.
 

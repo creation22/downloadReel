@@ -3,7 +3,7 @@ import { usePageMeta } from "../lib/seo";
 import { Container } from "../components/Container";
 
 export default function NotFound() {
-  usePageMeta({ title: "Page not found | downloadReel" });
+  usePageMeta({ title: "Page not found | DownloadReel" });
 
   return (
     <section className="flex min-h-[60vh] items-center py-20">
@@ -12,7 +12,7 @@ export default function NotFound() {
           404
         </p>
         <h1 className="mt-3 text-2xl font-semibold tracking-tight text-fg sm:text-3xl">
-          page not found
+          Page Not Found
         </h1>
         <p className="mt-3 text-sm text-muted">
           The page you're looking for doesn't exist.

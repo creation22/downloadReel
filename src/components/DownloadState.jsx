@@ -1,4 +1,4 @@
-import { Check, Loader2 } from "lucide-react";
+import { Check, Spinner } from "@phosphor-icons/react";
 import { cn } from "../lib/utils";
 
 /**
@@ -38,7 +38,7 @@ export function DownloadState({ steps, activeIndex, doneCount }) {
               {done ? (
                 <Check className="h-3.5 w-3.5" strokeWidth={2.5} />
               ) : active ? (
-                <Loader2 className="h-3.5 w-3.5 animate-spin" />
+                <Spinner className="h-3.5 w-3.5 animate-spin" />
               ) : (
                 <span className="h-1 w-1 rounded-full bg-current" />
               )}

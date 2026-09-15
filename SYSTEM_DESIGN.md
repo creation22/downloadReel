@@ -1,4 +1,4 @@
-# downloadReel — System Design
+# DownloadReel — System Design
 
 > Local-first video toolbox: download videos from social platforms,
 > convert between formats in the browser, and read guides — no signup,
@@ -6,7 +6,7 @@
 
 ## 1. Overview
 
-downloadReel is two cooperating processes plus static content:
+DownloadReel is two cooperating processes plus static content:
 
 | Piece | Tech | Port | Purpose |
 |---|---|---|---|

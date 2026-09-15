@@ -1,17 +1,17 @@
 import { useEffect, useState } from "react";
 import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
-import { Github, Menu, Search, X } from "lucide-react";
+import { List, MagnifyingGlass, X } from "@phosphor-icons/react";
 import { cn } from "../lib/utils";
-import { SITE, FOCUS_SEARCH_EVENT } from "../lib/site";
+import { FOCUS_SEARCH_EVENT } from "../lib/site";
 import { ThemeToggle } from "./ThemeToggle";
 import { Logo } from "./Logo";
 import { Container } from "./Container";
 
 const navLinks = [
-  { label: "tools", to: "/tools" },
-  { label: "converters", to: "/converters" },
-  { label: "downloaders", to: "/platforms" },
-  { label: "blog", to: "/blog" },
+  { label: "Tools", to: "/tools" },
+  { label: "Converters", to: "/converters" },
+  { label: "Downloaders", to: "/platforms" },
+  { label: "Blog", to: "/blog" },
 ];
 
 export function Navbar() {
@@ -37,7 +37,7 @@ export function Navbar() {
         <Link
           to="/"
           className="flex items-center gap-2.5 transition-opacity hover:opacity-80"
-          aria-label="downloadReel home"
+          aria-label="DownloadReel home"
         >
           <Logo />
         </Link>
@@ -59,15 +59,6 @@ export function Navbar() {
               {link.label}
             </NavLink>
           ))}
-          <a
-            href={SITE.github}
-            target="_blank"
-            rel="noreferrer"
-            className="inline-flex items-center gap-1.5 rounded-md px-2.5 py-1.5 text-sm text-muted transition-colors duration-150 hover:text-fg"
-          >
-            <Github className="h-3.5 w-3.5" />
-            github
-          </a>
         </nav>
 
         <div className="hidden items-center gap-2 md:flex">
@@ -78,7 +69,7 @@ export function Navbar() {
             title="Search tools"
             className="flex h-8 items-center gap-2 rounded-md border border-line bg-surface pl-2 pr-2 text-muted transition-colors duration-150 hover:border-line-strong hover:text-fg"
           >
-            <Search className="h-4 w-4" />
+            <MagnifyingGlass className="h-4 w-4" />
             <kbd className="hidden rounded border border-line bg-canvas px-1.5 py-0.5 font-mono text-[10px] text-faint lg:inline">
               /
             </kbd>
@@ -94,7 +85,7 @@ export function Navbar() {
             onClick={handleSearch}
             aria-label="Search tools"
           >
-            <Search className="h-4 w-4" />
+            <MagnifyingGlass className="h-4 w-4" />
           </button>
           <button
             type="button"
@@ -103,7 +94,7 @@ export function Navbar() {
             aria-label={open ? "Close menu" : "Open menu"}
             aria-expanded={open}
           >
-            {open ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
+            {open ? <X className="h-4 w-4" /> : <List className="h-4 w-4" />}
           </button>
         </div>
       </Container>
@@ -127,15 +118,6 @@ export function Navbar() {
                 {link.label}
               </NavLink>
             ))}
-            <a
-              href={SITE.github}
-              target="_blank"
-              rel="noreferrer"
-              className="mt-1 inline-flex items-center gap-2 rounded-md px-3 py-2.5 text-sm text-muted transition-colors hover:bg-surface hover:text-fg"
-            >
-              <Github className="h-4 w-4" />
-              github
-            </a>
           </Container>
         </div>
       )}

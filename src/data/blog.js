@@ -67,7 +67,7 @@ export const blogPosts = [
         ]
       },
       {
-        "h": "Converting with downloadReel",
+        "h": "Converting with DownloadReel",
         "body": [
           "The converter runs entirely in your browser — your file never leaves your device, which makes it both faster and more private than upload-based converters."
         ],
@@ -663,7 +663,7 @@ export const blogPosts = [
         ]
       },
       {
-        "h": "Extracting with downloadReel",
+        "h": "Extracting with DownloadReel",
         "body": [
           "The extractor runs locally in your browser — your file never uploads anywhere."
         ],
@@ -1242,7 +1242,7 @@ export const blogPosts = [
         ]
       },
       {
-        "h": "Converting with downloadReel",
+        "h": "Converting with DownloadReel",
         "body": [
           "The converter runs entirely in your browser — your file never leaves your device, which makes it both faster and more private than upload-based converters."
         ],
@@ -2900,7 +2900,7 @@ export const blogPosts = [
         ]
       },
       {
-        "h": "Converting with downloadReel",
+        "h": "Converting with DownloadReel",
         "body": [
           "The converter runs entirely in your browser — your file never leaves your device, which makes it both faster and more private than upload-based converters."
         ],
@@ -3487,7 +3487,7 @@ export const blogPosts = [
         ]
       },
       {
-        "h": "Converting with downloadReel",
+        "h": "Converting with DownloadReel",
         "body": [
           "The converter runs entirely in your browser — your file never leaves your device, which makes it both faster and more private than upload-based converters."
         ],
@@ -4285,7 +4285,7 @@ export const blogPosts = [
         ]
       },
       {
-        "h": "Extracting with downloadReel",
+        "h": "Extracting with DownloadReel",
         "body": [
           "The extractor runs locally in your browser — your file never uploads anywhere."
         ],
@@ -4365,7 +4365,7 @@ export const blogPosts = [
         ]
       },
       {
-        "h": "Converting with downloadReel",
+        "h": "Converting with DownloadReel",
         "body": [
           "The converter runs entirely in your browser — your file never leaves your device, which makes it both faster and more private than upload-based converters."
         ],
@@ -4439,7 +4439,7 @@ export const blogPosts = [
         ]
       },
       {
-        "h": "Extracting with downloadReel",
+        "h": "Extracting with DownloadReel",
         "body": [
           "The extractor runs locally in your browser — your file never uploads anywhere."
         ],
@@ -4646,7 +4646,7 @@ export const blogPosts = [
         ]
       },
       {
-        "h": "Extracting with downloadReel",
+        "h": "Extracting with DownloadReel",
         "body": [
           "The extractor runs locally in your browser — your file never uploads anywhere."
         ],
@@ -5369,7 +5369,7 @@ export const blogPosts = [
         ]
       },
       {
-        "h": "Converting with downloadReel",
+        "h": "Converting with DownloadReel",
         "body": [
           "The converter runs entirely in your browser — your file never leaves your device, which makes it both faster and more private than upload-based converters."
         ],
@@ -6208,7 +6208,7 @@ export const blogPosts = [
         ]
       },
       {
-        "h": "Converting with downloadReel",
+        "h": "Converting with DownloadReel",
         "body": [
           "The converter runs entirely in your browser — your file never leaves your device, which makes it both faster and more private than upload-based converters."
         ],
@@ -6880,7 +6880,7 @@ export const blogPosts = [
         ]
       },
       {
-        "h": "Converting with downloadReel",
+        "h": "Converting with DownloadReel",
         "body": [
           "The converter runs entirely in your browser — your file never leaves your device, which makes it both faster and more private than upload-based converters."
         ],

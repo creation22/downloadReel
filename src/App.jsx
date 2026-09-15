@@ -61,12 +61,21 @@ export default function App() {
   return (
     <BrowserRouter>
       <ScrollToTop />
-      <div className="flex min-h-screen flex-col bg-canvas font-sans text-fg">
+      <div className="relative flex min-h-screen flex-col bg-canvas font-sans text-fg">
+        {/* semicircular linear-gradient backdrop in brand #ed5526 */}
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-x-0 top-0 z-0 flex justify-center overflow-hidden"
+        >
+          <div className="h-[300px] w-[1200px] max-w-none shrink-0 rounded-b-[50%] bg-[linear-gradient(180deg,rgba(242,102,58,0.32)_0%,rgba(237,85,38,0.22)_38%,rgba(237,85,38,0.08)_62%,transparent_100%)] blur-[2px] sm:h-[380px]" />
+        </div>
+        <div className="relative z-10 flex min-h-screen flex-col">
         <Navbar />
         <main className="flex-1">
           <AnimatedRoutes />
         </main>
         <Footer />
+        </div>
         <Toaster
           position="bottom-right"
           toastOptions={{

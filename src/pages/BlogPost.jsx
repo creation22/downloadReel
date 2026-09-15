@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
-import { ArrowLeft, ArrowRight, ChevronRight, CircleCheck } from "lucide-react";
+import { ArrowLeft, ArrowRight, CaretRight, CheckCircle } from "@phosphor-icons/react";
 import { usePageMeta } from "../lib/seo";
 import { getPostBySlug, getRelatedPosts, blogPosts } from "../data/blog";
 import { Container } from "../components/Container";
@@ -27,7 +27,7 @@ export default function BlogPost() {
   const post = getPostBySlug(slug);
 
   usePageMeta({
-    title: post ? `${post.title} — downloadReel Blog` : "Blog — downloadReel",
+    title: post ? `${post.title} — DownloadReel Blog` : "Blog — DownloadReel",
     description: post?.description,
   });
 
@@ -54,7 +54,7 @@ export default function BlogPost() {
             <Link to="/blog" className="transition-colors hover:text-fg">
               blog
             </Link>
-            <ChevronRight className="h-3 w-3" />
+            <CaretRight className="h-3 w-3" />
             <Link
               to={`/blog?cat=${post.category}`}
               className="transition-colors hover:text-fg"
@@ -126,7 +126,7 @@ export default function BlogPost() {
                         key={i}
                         className="flex gap-3 text-sm leading-relaxed text-muted"
                       >
-                        <CircleCheck className="mt-0.5 h-4 w-4 shrink-0 text-accent" />
+                        <CheckCircle className="mt-0.5 h-4 w-4 shrink-0 text-accent" />
                         <span dangerouslySetInnerHTML={{ __html: item }} />
                       </li>
                     ))}
@@ -147,7 +147,7 @@ export default function BlogPost() {
                       key={i}
                       className="flex gap-3 text-sm leading-relaxed text-fg/90"
                     >
-                      <CircleCheck className="mt-0.5 h-4 w-4 shrink-0 text-accent" />
+                      <CheckCircle className="mt-0.5 h-4 w-4 shrink-0 text-accent" />
                       <span dangerouslySetInnerHTML={{ __html: tip }} />
                     </li>
                   ))}
@@ -166,7 +166,7 @@ export default function BlogPost() {
                     <details key={i} className="group px-5 py-4">
                       <summary className="flex cursor-pointer list-none items-center justify-between gap-4 text-sm font-medium text-fg">
                         {faq.q}
-                        <ChevronRight className="h-4 w-4 shrink-0 text-faint transition-transform duration-150 group-open:rotate-90" />
+                        <CaretRight className="h-4 w-4 shrink-0 text-faint transition-transform duration-150 group-open:rotate-90" />
                       </summary>
                       <p
                         className="mt-3 text-sm leading-relaxed text-muted"

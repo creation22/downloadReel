@@ -6,7 +6,7 @@ import { ConverterBox } from "../components/ConverterBox";
 import { FAQ } from "../components/FAQ";
 import { ToolGrid } from "../components/ToolGrid";
 import { SectionHeading } from "../components/SectionHeading";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight } from "@phosphor-icons/react";
 
 const chip =
   "rounded border border-line bg-surface px-2 py-0.5 font-mono text-[11px] text-muted";
@@ -17,7 +17,7 @@ const chip =
  */
 export default function ConverterPage({ converter }) {
   usePageMeta({
-    title: `${converter.title} | downloadReel`,
+    title: `${converter.title} | DownloadReel`,
     description: converter.description,
   });
 
@@ -117,7 +117,7 @@ export default function ConverterPage({ converter }) {
           <Container>
             <SectionHeading
               eyebrow="same engine"
-              title="more converters"
+              title="More Converters"
               align="left"
             />
             <ToolGrid tools={related} className="mt-8" />

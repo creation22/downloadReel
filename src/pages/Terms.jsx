@@ -4,8 +4,8 @@ import { Breadcrumbs } from "../components/Breadcrumbs";
 
 export default function Terms() {
   usePageMeta({
-    title: "Terms | downloadReel",
-    description: "Terms of use for downloadReel tools and services.",
+    title: "Terms | DownloadReel",
+    description: "Terms of use for DownloadReel tools and services.",
   });
 
   return (
@@ -14,14 +14,14 @@ export default function Terms() {
         <Breadcrumbs items={[{ label: "Home", to: "/" }, { label: "Terms" }]} />
 
         <h1 className="mt-8 text-2xl font-semibold tracking-tight text-fg sm:text-3xl">
-          terms
+            Terms
         </h1>
 
         <div className="mt-8 space-y-8">
           <div>
             <h2 className="text-base font-semibold text-fg">Using the tools</h2>
             <p className="mt-2 text-[15px] leading-relaxed text-muted">
-              downloadReel provides tools for preparing downloads of videos you
+              DownloadReel provides tools for preparing downloads of videos you
               already have access to. The tools are free to use and require no
               account.
             </p>

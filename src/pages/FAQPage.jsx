@@ -25,9 +25,9 @@ const extraFaqs = [
 
 export default function FAQPage() {
   usePageMeta({
-    title: "FAQ | downloadReel",
+    title: "FAQ | DownloadReel",
     description:
-      "Answers to common questions about downloadReel — supported platforms, accounts, downloads, privacy and troubleshooting.",
+      "Answers to common questions about DownloadReel — supported platforms, accounts, downloads, privacy and troubleshooting.",
   });
 
   return (
@@ -40,7 +40,7 @@ export default function FAQPage() {
             help
           </p>
           <h1 className="mt-2 text-2xl font-semibold tracking-tight text-fg sm:text-3xl">
-            frequently asked questions
+            Frequently Asked Questions
           </h1>
           <p className="mt-3 text-sm leading-relaxed text-muted">
             Short, direct answers. If something isn't covered here, the tool

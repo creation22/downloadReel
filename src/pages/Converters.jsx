@@ -6,9 +6,9 @@ import { ToolDirectory } from "../components/ToolDirectory";
 
 export default function Converters() {
   usePageMeta({
-    title: "Video Converters | downloadReel",
+    title: "Video Converters | DownloadReel",
     description:
-      "Every downloadReel converter in one place — format conversion, audio extraction, downscaling and re-encoding, all locally in your browser.",
+      "Every DownloadReel converter in one place — format conversion, audio extraction, downscaling and re-encoding, all locally in your browser.",
   });
 
   const converterTools = tools.filter((t) => t.category !== "download");
@@ -26,7 +26,7 @@ export default function Converters() {
             directory · local processing
           </p>
           <h1 className="mt-2 text-2xl font-semibold tracking-tight text-fg sm:text-3xl">
-            video converters
+            Video Converters
           </h1>
           <p className="mt-3 text-sm leading-relaxed text-muted">
             Convert, extract, downscale and re-encode video files — all

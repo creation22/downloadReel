@@ -1,7 +1,7 @@
 export const sharedFaqs = [
   {
     q: "What platforms are supported?",
-    a: "downloadReel currently covers X, Instagram, TikTok, Facebook, Reddit, Pinterest, Vimeo, Threads, Snapchat, LinkedIn and Twitch. See the Tools page for the full directory.",
+    a: "DownloadReel currently covers X, Instagram, TikTok, Facebook, Reddit, Pinterest, Vimeo, Threads, Snapchat, LinkedIn and Twitch. See the Tools page for the full directory.",
   },
   {
     q: "Do I need an account?",
@@ -21,7 +21,7 @@ export const sharedFaqs = [
   },
   {
     q: "Can I use this on mobile?",
-    a: "Yes. downloadReel works in mobile browsers and the interface is built mobile-first, so no app install is needed.",
+    a: "Yes. DownloadReel works in mobile browsers and the interface is built mobile-first, so no app install is needed.",
   },
   {
     q: "Why might a video not be downloadable?",

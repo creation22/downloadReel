@@ -1,4 +1,4 @@
-# downloadReel Backend — Downloader Test & Fix Report
+# DownloadReel Backend — Downloader Test & Fix Report
 
 **Date:** 2026-09-11
 **Scope:** `server/index.mjs` (yt-dlp wrapper API) and the extractors behind each platform card in `src/data/platforms.js`

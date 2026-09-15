@@ -1,5 +1,5 @@
 export const SITE = {
-  name: "downloadReel",
+  name: "DownloadReel",
   github: "https://github.com/creation22/downloadReel",
 };
 

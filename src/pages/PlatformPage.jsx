@@ -19,7 +19,7 @@ const chip =
  */
 export default function PlatformPage({ platform }) {
   usePageMeta({
-    title: `${platform.title} | downloadReel`,
+    title: `${platform.title} | DownloadReel`,
     description: platform.description,
   });
 
@@ -133,7 +133,7 @@ export default function PlatformPage({ platform }) {
         <Container>
           <SectionHeading
             eyebrow="keep going"
-            title="other downloaders"
+            title="Other Downloaders"
             align="left"
           />
           <ToolGrid tools={others} className="mt-8" />

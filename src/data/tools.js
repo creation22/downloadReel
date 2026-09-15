@@ -1,24 +1,29 @@
+import { createElement } from "react";
 import {
   Archive,
   Scissors,
   Image as ImageIcon,
   Download,
-  ArrowLeftRight,
-  Minimize2,
-  AudioLines,
-  Clapperboard,
-} from "lucide-react";
+  ArrowsLeftRight,
+  ArrowsInSimple,
+  Waveform,
+  FilmStrip,
+} from "@phosphor-icons/react";
 import { platforms } from "./platforms";
 import { converters, converterToTool } from "./converters";
 
+/** Wrap a Phosphor icon so it always renders in the duotone weight. */
+const duotone = (Icon) => (props) =>
+  createElement(Icon, { weight: "duotone", ...props });
+
 export const toolCategories = [
   { id: "all", label: "All" },
-  { id: "download", label: "Download", icon: Download },
-  { id: "convert", label: "Convert", icon: ArrowLeftRight },
-  { id: "compress", label: "Compress", icon: Minimize2 },
-  { id: "edit", label: "Edit", icon: Scissors },
-  { id: "audio", label: "Audio", icon: AudioLines },
-  { id: "creator", label: "Creator", icon: Clapperboard },
+  { id: "download", label: "Download", icon: duotone(Download) },
+  { id: "convert", label: "Convert", icon: duotone(ArrowsLeftRight) },
+  { id: "compress", label: "Compress", icon: duotone(ArrowsInSimple) },
+  { id: "edit", label: "Edit", icon: duotone(Scissors) },
+  { id: "audio", label: "Audio", icon: duotone(Waveform) },
+  { id: "creator", label: "Creator", icon: duotone(FilmStrip) },
 ];
 
 function titleCase(name) {
@@ -48,7 +53,7 @@ const futureTools = [
     description: "Reduce the file size of a video.",
     category: "compress",
     available: false,
-    icon: Archive,
+    icon: duotone(Archive),
     meta: "mp4 · webm · mov",
   },
   {
@@ -57,7 +62,7 @@ const futureTools = [
     description: "Cut a video down to the part you need.",
     category: "edit",
     available: false,
-    icon: Scissors,
+    icon: duotone(Scissors),
     meta: "mp4 · webm · mov",
   },
   {
@@ -66,7 +71,7 @@ const futureTools = [
     description: "Save the thumbnail image of a video.",
     category: "creator",
     available: false,
-    icon: ImageIcon,
+    icon: duotone(ImageIcon),
     meta: "jpg · png",
   },
 ];

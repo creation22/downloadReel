@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Moon, Sun } from "lucide-react";
+import { Moon, Sun } from "@phosphor-icons/react";
 
 /**
  * Dark-first theme toggle. Adds/removes the `light` class on <html>

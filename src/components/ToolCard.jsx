@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight } from "@phosphor-icons/react";
 import { cn } from "../lib/utils";
 import { PlatformIcon } from "./icons/PlatformIcon";
 

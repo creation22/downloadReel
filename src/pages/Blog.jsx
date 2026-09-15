@@ -1,6 +1,6 @@
 import { useMemo, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
-import { ArrowRight, ChevronLeft, ChevronRight, Search } from "lucide-react";
+import { ArrowRight, CaretLeft, CaretRight, MagnifyingGlass } from "@phosphor-icons/react";
 import { usePageMeta } from "../lib/seo";
 import { blogPosts, blogCategories } from "../data/blog";
 import { Container } from "../components/Container";
@@ -72,7 +72,7 @@ function PostCard({ post, featured = false }) {
 
 export default function Blog() {
   usePageMeta({
-    title: "Blog — downloadReel",
+    title: "Blog — DownloadReel",
     description: `Guides on downloading, converting and editing video: ${blogPosts.length} in-depth articles on formats, codecs, tools and workflows.`,
   });
 
@@ -115,7 +115,7 @@ export default function Blog() {
         <Container>
           <div className="max-w-2xl">
             <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-faint">
-              the downloadreel blog
+              the DownloadReel blog
             </p>
             <h1 className="mt-3 text-2xl font-bold leading-[1.15] tracking-tight text-fg sm:text-4xl">
               Guides on downloading, converting and making sense of video.
@@ -128,7 +128,7 @@ export default function Blog() {
 
             {/* Search */}
             <div className="relative mt-6 max-w-md">
-              <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-faint" />
+              <MagnifyingGlass className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-faint" />
               <input
                 type="search"
                 value={query}
@@ -206,7 +206,7 @@ export default function Blog() {
                 className="flex h-8 w-8 items-center justify-center rounded-md border border-line bg-surface text-muted transition-colors hover:text-fg disabled:opacity-40"
                 aria-label="Previous page"
               >
-                <ChevronLeft className="h-4 w-4" />
+                <CaretLeft className="h-4 w-4" />
               </button>
               {Array.from({ length: pageCount }, (_, i) => i + 1).map((n) => (
                 <button
@@ -229,7 +229,7 @@ export default function Blog() {
                 className="flex h-8 w-8 items-center justify-center rounded-md border border-line bg-surface text-muted transition-colors hover:text-fg disabled:opacity-40"
                 aria-label="Next page"
               >
-                <ChevronRight className="h-4 w-4" />
+                <CaretRight className="h-4 w-4" />
               </button>
             </nav>
           )}

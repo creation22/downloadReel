@@ -1,5 +1,5 @@
 import { useEffect, useId, useRef, useState } from "react";
-import { AlertCircle, Check, FileVideo, Loader2, Save, X } from "lucide-react";
+import { WarningCircle, Check, FileVideo, Spinner, FloppyDisk, X } from "@phosphor-icons/react";
 import {
   convertVideo,
   cancelConversion,
@@ -207,7 +207,7 @@ export function ConverterBox({ converter }) {
             }}
           />
           <span className="flex h-10 w-10 items-center justify-center rounded-md border border-line bg-canvas text-muted">
-            <FileVideo className="h-5 w-5" />
+            <FileVideo weight="duotone" className="h-5 w-5" />
           </span>
           <p className="mt-1 text-sm font-medium text-fg">
             Drop a video file here
@@ -252,7 +252,7 @@ export function ConverterBox({ converter }) {
             )}
           >
             {status === "working" && (
-              <Loader2 className="h-4 w-4 animate-spin" />
+              <Spinner className="h-4 w-4 animate-spin" />
             )}
             {status === "working" ? "Working..." : "Convert"}
           </button>
@@ -261,7 +261,7 @@ export function ConverterBox({ converter }) {
 
       {status === "error" && error && (
         <div className="mt-3 flex animate-fade-in items-start gap-2 text-sm text-danger">
-          <AlertCircle className="mt-0.5 h-4 w-4 shrink-0" />
+          <WarningCircle className="mt-0.5 h-4 w-4 shrink-0" />
           <p>{error}</p>
         </div>
       )}
@@ -369,7 +369,7 @@ export function ConverterBox({ converter }) {
               onClick={save}
               className="inline-flex h-10 items-center justify-center gap-2 rounded-md bg-btn px-5 text-sm font-medium text-btn-fg transition-colors duration-150 hover:bg-btn-hover"
             >
-              {saved ? <Check className="h-4 w-4" /> : <Save className="h-4 w-4" />}
+              {saved ? <Check className="h-4 w-4" /> : <FloppyDisk className="h-4 w-4" />}
               {saved ? "Saved" : `Save ${converter.outputLabel}`}
             </button>
             <p className="text-xs leading-relaxed text-faint">

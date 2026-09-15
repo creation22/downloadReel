@@ -5,6 +5,9 @@
     -apple-system, "Segoe UI", sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas,
     monospace;
+  --font-display: "Geist", "DM Sans Fallback", ui-sans-serif, system-ui,
+    -apple-system, "Segoe UI", sans-serif;
+  --font-serif: "Instrument Serif", ui-serif, Georgia, serif;
 
   --animate-page-in: page-in 200ms ease-out both;
   --animate-fade-up: fade-up 350ms ease-out both;
@@ -105,9 +108,16 @@
   body {
     font-family: var(--font-sans);
     background-color: var(--canvas);
+    /* base canvas only — the semicircular linear-gradient backdrop
+       in brand #ed5526 lives in App.jsx */
+    background-repeat: no-repeat;
+    background-attachment: fixed;
     color: var(--fg);
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
+  }
+  :root.light body {
+    background-image: none;
   }
   ::selection {
     background: color-mix(in oklab, var(--accent) 30%, transparent);
