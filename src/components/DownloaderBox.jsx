@@ -1,6 +1,6 @@
-import { useMemo, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import { AlertCircle, Check, Download } from "lucide-react";
+import { AlertCircle, Check, Download, Loader2, X } from "lucide-react";
 import { detectPlatform, DETECT_ERRORS } from "../lib/detect";
 import { downloadVideo, STAGE_LABELS } from "../services/downloader";
 import { formatBytes, formatDuration } from "../lib/utils";
@@ -26,6 +26,11 @@ export function DownloaderBox({ platform = null }) {
   const [stage, setStage] = useState(null); // "detecting" | "fetching"
   const [error, setError] = useState(null); // { message, linkTo?, linkLabel? }
   const [result, setResult] = useState(null);
+  // In-page download progress: idle | downloading | done | error.
+  // `progress` is { loaded, total } in bytes (total may be null).
+  const [dlState, setDlState] = useState("idle");
+  const [progress, setProgress] = useState(null);
+  const abortRef = useRef(null);
 
   const liveDetected = useMemo(() => {
     if (!url.trim()) return null;
@@ -58,6 +63,10 @@ export function DownloaderBox({ platform = null }) {
 
     setError(null);
     setResult(null);
+    abortRef.current?.abort();
+    abortRef.current = null;
+    setDlState("idle");
+    setProgress(null);
 
     const detection = detectPlatform(url);
     if (detection.error) {
@@ -96,11 +105,84 @@ export function DownloaderBox({ platform = null }) {
   }
 
   function reset() {
+    abortRef.current?.abort();
+    abortRef.current = null;
     setStatus("idle");
     setStage(null);
     setError(null);
     setResult(null);
+    setDlState("idle");
+    setProgress(null);
     setUrl("");
+  }
+
+  /**
+   * Download the prepared file through fetch with a byte-counting
+   * stream reader, so the button + progress bar show the real
+   * percentage. Completed bytes are saved via a blob object URL,
+   * which preserves the previous "save to disk" behaviour.
+   */
+  async function handleDownload() {
+    if (dlState === "downloading" || !result?.file?.url) return;
+    abortRef.current?.abort();
+    const controller = new AbortController();
+    abortRef.current = controller;
+
+    const expectedTotal =
+      Number.isFinite(result.file.filesize) && result.file.filesize > 0
+        ? result.file.filesize
+        : null;
+    setDlState("downloading");
+    setProgress({ loaded: 0, total: expectedTotal });
+
+    try {
+      const response = await fetch(result.file.url, {
+        signal: controller.signal,
+      });
+      if (!response.ok || !response.body) {
+        throw new Error(`Download failed (HTTP ${response.status}).`);
+      }
+      const headerTotal = Number(response.headers.get("Content-Length"));
+      const total =
+        Number.isFinite(headerTotal) && headerTotal > 0
+          ? headerTotal
+          : expectedTotal;
+
+      const reader = response.body.getReader();
+      const chunks = [];
+      let loaded = 0;
+      for (;;) {
+        const { done, value } = await reader.read();
+        if (done) break;
+        chunks.push(value);
+        loaded += value.byteLength;
+        setProgress({ loaded, total });
+      }
+
+      const blob = new Blob(chunks, { type: "video/mp4" });
+      const objectUrl = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = objectUrl;
+      a.download = result.file.filename;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      window.setTimeout(() => URL.revokeObjectURL(objectUrl), 15000);
+
+      setProgress({ loaded, total: total ?? loaded });
+      setDlState("done");
+    } catch (err) {
+      if (err?.name === "AbortError") {
+        setDlState("idle");
+      } else {
+        setDlState("error");
+      }
+      setProgress(null);
+    }
+  }
+
+  function cancelDownload() {
+    abortRef.current?.abort();
   }
 
   return (
@@ -242,21 +324,109 @@ export function DownloaderBox({ platform = null }) {
                 className="mt-3 max-h-80 w-full rounded-md border border-line bg-black"
               />
 
-              <div className="mt-4 flex flex-col gap-3 sm:flex-row sm:items-center">
-                <a
-                  href={result.file.url}
-                  download={result.file.filename}
-                  className="inline-flex h-10 items-center justify-center gap-2 rounded-md bg-btn px-5 text-sm font-medium text-btn-fg transition-colors duration-150 hover:bg-btn-hover"
-                >
-                  <Download className="h-4 w-4" />
-                  Download video
-                </a>
-                <p className="font-mono text-[11px] leading-relaxed text-faint">
-                  {result.file.filename}
-                  {result.file.filesize
-                    ? ` · ${formatBytes(result.file.filesize)}`
-                    : ""}
-                </p>
+              <div className="mt-4">
+                <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
+                  <button
+                    type="button"
+                    onClick={
+                      dlState === "downloading" ? undefined : handleDownload
+                    }
+                    disabled={dlState === "downloading"}
+                    className="inline-flex h-10 min-w-44 items-center justify-center gap-2 rounded-md bg-btn px-5 text-sm font-medium text-btn-fg transition-colors duration-150 hover:bg-btn-hover disabled:cursor-wait disabled:opacity-90"
+                  >
+                    {dlState === "downloading" ? (
+                      <>
+                        <Loader2 className="h-4 w-4 animate-spin" />
+                        {progress?.total
+                          ? `Downloading… ${Math.min(100, Math.floor((progress.loaded / progress.total) * 100))}%`
+                          : "Downloading…"}
+                      </>
+                    ) : dlState === "done" ? (
+                      <>
+                        <Check className="h-4 w-4" strokeWidth={2.5} />
+                        Saved — download again
+                      </>
+                    ) : (
+                      <>
+                        <Download className="h-4 w-4" />
+                        {dlState === "error"
+                          ? "Retry download"
+                          : "Download video"}
+                      </>
+                    )}
+                  </button>
+                  {dlState === "downloading" ? (
+                    <button
+                      type="button"
+                      onClick={cancelDownload}
+                      className="inline-flex h-10 items-center justify-center gap-1.5 rounded-md border border-line px-4 text-sm text-muted transition-colors duration-150 hover:border-line-strong hover:text-fg"
+                    >
+                      <X className="h-4 w-4" />
+                      Cancel
+                    </button>
+                  ) : (
+                    <p className="font-mono text-[11px] leading-relaxed text-faint">
+                      {result.file.filename}
+                      {result.file.filesize
+                        ? ` · ${formatBytes(result.file.filesize)}`
+                        : ""}
+                    </p>
+                  )}
+                </div>
+
+                {dlState === "downloading" && progress && (
+                  <div className="mt-3 animate-fade-in">
+                    <div
+                      className="h-1.5 overflow-hidden rounded-full bg-surface-2"
+                      role="progressbar"
+                      aria-label="Download progress"
+                      aria-valuemin={0}
+                      aria-valuemax={100}
+                      aria-valuenow={
+                        progress.total
+                          ? Math.min(
+                              100,
+                              Math.floor(
+                                (progress.loaded / progress.total) * 100
+                              )
+                            )
+                          : undefined
+                      }
+                    >
+                      {progress.total ? (
+                        <div
+                          className="h-full rounded-full bg-ok transition-[width] duration-200"
+                          style={{
+                            width: `${Math.min(100, (progress.loaded / progress.total) * 100)}%`,
+                          }}
+                        />
+                      ) : (
+                        <div className="h-full w-1/2 animate-pulse rounded-full bg-ok" />
+                      )}
+                    </div>
+                    <p className="mt-1.5 font-mono text-[11px] text-faint">
+                      {formatBytes(progress.loaded)}
+                      {progress.total
+                        ? ` of ${formatBytes(progress.total)}`
+                        : " downloaded"}
+                    </p>
+                  </div>
+                )}
+
+                {dlState === "done" && (
+                  <p className="mt-2 flex animate-fade-in items-center gap-1.5 text-xs text-ok">
+                    <Check className="h-3.5 w-3.5" strokeWidth={2.5} />
+                    Saved to your downloads.
+                  </p>
+                )}
+
+                {dlState === "error" && (
+                  <p className="mt-2 flex animate-fade-in items-center gap-1.5 text-xs text-danger">
+                    <AlertCircle className="h-3.5 w-3.5" />
+                    The download was interrupted. Check your connection and
+                    retry.
+                  </p>
+                )}
               </div>
             </>
           ) : (
