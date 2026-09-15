@@ -318,7 +318,7 @@ export function DownloaderBox({ platform = null }) {
 
               <video
                 controls
-                preload="metadata"
+                preload="none"
                 poster={result.thumbnail || undefined}
                 src={result.file.url}
                 className="mt-3 max-h-80 w-full rounded-md border border-line bg-black"

@@ -19,7 +19,7 @@ const raw = [
       "Download videos from X using a simple link. Paste a public post URL and prepare the video for download.",
     placeholder: "Paste your X video link...",
     exampleUrl: "https://x.com/...",
-    domains: ["x.com", "twitter.com"],
+    domains: ["x.com", "twitter.com", "t.co"],
     cardDescription: "Save videos from public posts and threads.",
     whatIs: [
       "The X video downloader prepares videos posted on X so you can save them to your device. Paste a link to a post that contains a video and the tool handles detection and preparation for you.",
@@ -30,7 +30,7 @@ const raw = [
       "Paste it into the field above and press Download.",
       "Once the video is prepared, save it to your device.",
     ],
-    supportedLinks: ["https://x.com/...", "https://twitter.com/..."],
+    supportedLinks: ["https://x.com/...", "https://twitter.com/...", "https://t.co/..."],
     faqs: [
       {
         q: "Do I need an X account to use this?",
@@ -58,7 +58,7 @@ const raw = [
       "Download Reels and feed videos from public Instagram posts. Paste a link and prepare the video for download.",
     placeholder: "Paste your Instagram video link...",
     exampleUrl: "https://www.instagram.com/reel/...",
-    domains: ["instagram.com"],
+    domains: ["instagram.com", "instagr.am"],
     cardDescription: "Save Reels and feed videos from public posts.",
     whatIs: [
       "The Instagram video downloader prepares videos from public Instagram posts — including Reels and feed videos — so you can save them to your device.",
@@ -74,6 +74,7 @@ const raw = [
       "https://www.instagram.com/reels/...",
       "https://www.instagram.com/p/...",
       "https://instagram.com/...",
+      "https://instagr.am/...",
     ],
     faqs: [
       {
@@ -145,7 +146,7 @@ const raw = [
       "Download videos from public Facebook posts, Reels and Watch using a simple link.",
     placeholder: "Paste your Facebook video link...",
     exampleUrl: "https://www.facebook.com/watch/?v=...",
-    domains: ["facebook.com", "fb.watch"],
+    domains: ["facebook.com", "fb.watch", "fb.me"],
     cardDescription: "Save videos from public posts, Reels and Watch.",
     whatIs: [
       "The Facebook video downloader prepares videos from public Facebook posts — feed videos, Reels and Watch content — so you can save them to your device.",

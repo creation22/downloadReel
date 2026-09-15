@@ -4,6 +4,7 @@ import { platformToTool } from "../data/tools";
 import { Container } from "../components/Container";
 import { Breadcrumbs } from "../components/Breadcrumbs";
 import { DownloaderBox } from "../components/DownloaderBox";
+import { InstagramReelBox } from "../components/InstagramReelBox";
 import { CopyChip } from "../components/CopyChip";
 import { FAQ } from "../components/FAQ";
 import { ToolGrid } from "../components/ToolGrid";
@@ -48,7 +49,11 @@ export default function PlatformPage({ platform }) {
             </p>
 
             <div className="mt-8">
-              <DownloaderBox platform={platform} />
+              {platform.slug === "instagram" ? (
+                <InstagramReelBox />
+              ) : (
+                <DownloaderBox platform={platform} />
+              )}
               <div className="mt-4 flex flex-wrap items-center gap-2">
                 <span className="font-mono text-[10px] uppercase tracking-wider text-faint">
                   domains
