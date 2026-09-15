@@ -63,7 +63,12 @@ const COOKIES_FILE =
 // Best video+audio (merged with ffmpeg), falling back to the best
 // pre-merged format. Several platforms only serve split DASH/HLS
 // streams, so yt-dlp needs ffmpeg to merge them.
-const FORMAT = "bv*+ba/b";
+//
+// The avc/mp4a preference is deliberate: plain `bv*+ba` often picks
+// AV1/VP9 video + Opus audio, which many built-in players can't decode —
+// the file then plays audio with no picture ("only voice"). H.264 + AAC
+// in MP4 plays everywhere, so it is preferred at every fallback level.
+const FORMAT = "bv*[vcodec^=avc]+ba[acodec^=mp4a]/b[vcodec^=avc]/bv*+ba/b";
 
 // yt-dlp defaults to curl_cffi browser impersonation. On some networks
 // impersonated TLS sessions stall indefinitely (extraction never
