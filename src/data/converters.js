@@ -55,20 +55,21 @@ function formatConverter({ slug, from, fromExts, to, toExt, note }) {
       input,
       ...(to === "webm"
         ? [
+            // VP9 (libvpx-vp9) crashes the wasm engine — VP8 is the stable path.
             "-c:v",
-            "libvpx-vp9",
+            "libvpx",
             "-deadline",
             "realtime",
             "-cpu-used",
             "5",
             "-crf",
-            "34",
+            "12",
             "-b:v",
-            "0",
+            "2M",
             "-c:a",
-            "libopus",
-            "-b:a",
-            "128k",
+            "libvorbis",
+            "-q:a",
+            "5",
           ]
         : [
             "-c:v",
@@ -542,25 +543,47 @@ const raw = [
     convertingLabel: "Tone-mapping to SDR...",
     outputLabel: "SDR video",
     outputExt: "mp4",
-    buildArgs: (input, output) => [
-      "-i",
-      input,
-      "-vf",
-      "zscale=transfer=linear:npl=100,tonemap=hable,zscale=transfer=bt709:matrix=bt709:range=limited",
-      "-c:v",
-      "libx264",
-      "-preset",
-      "veryfast",
-      "-crf",
-      "23",
-      "-c:a",
-      "aac",
-      "-b:a",
-      "160k",
-      "-movflags",
-      "+faststart",
-      output,
-    ],
+    /**
+     * The chain is picked after inspecting the file: real HDR input gets
+     * zscale + tonemap with its actual color tags; SDR input (or files with
+     * no HDR metadata) is simply re-encoded — zscale refuses to guess on
+     * untagged SDR sources, which previously crashed the engine.
+     */
+    probesInput: true,
+    buildArgs: (input, output, info) => {
+      const x264 = [
+        "-c:v",
+        "libx264",
+        "-preset",
+        "veryfast",
+        "-crf",
+        "23",
+        "-pix_fmt",
+        "yuv420p",
+        "-c:a",
+        "aac",
+        "-b:a",
+        "160k",
+        "-movflags",
+        "+faststart",
+      ];
+      if (!info?.isHdr) return ["-i", input, ...x264, output];
+      const tin =
+        info.transfer && info.transfer !== "unknown"
+          ? info.transfer
+          : "smpte2084";
+      const pin = info.primaries || "bt2020";
+      const min = info.matrix || "bt2020nc";
+      const rin = info.range === "full" ? "full" : "limited";
+      return [
+        "-i",
+        input,
+        "-vf",
+        `zscale=tin=${tin}:pin=${pin}:min=${min}:rin=${rin}:transfer=linear:npl=100,tonemap=hable,zscale=transfer=bt709:matrix=bt709:primaries=bt709:range=limited,format=yuv420p`,
+        ...x264,
+        output,
+      ];
+    },
     icon: SunMedium,
     whatIs: [
       "The HDR to SDR converter tone-maps HDR video to standard dynamic range, locally in your browser. This makes HDR footage watchable on ordinary SDR screens.",
@@ -580,7 +603,7 @@ const raw = [
       uploadFaq,
       {
         q: "Does it work on every HDR video?",
-        a: "It works where the source allows. Some HDR formats and metadata combinations can't be tone-mapped faithfully, so results vary.",
+        a: "It works where the source allows. Some HDR formats and metadata combinations can't be tone-mapped faithfully, so results vary. Files without HDR metadata are re-encoded as-is — nothing needs tone-mapping.",
       },
     ],
   },

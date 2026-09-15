@@ -1,4 +1,4 @@
-import { useId, useState } from "react";
+import { useEffect, useId, useRef, useState } from "react";
 import { AlertCircle, Check, FileVideo, Loader2, Save, X } from "lucide-react";
 import {
   convertVideo,
@@ -10,6 +10,13 @@ import { cn, formatBytes } from "../lib/utils";
 import { DownloadState } from "./DownloadState";
 
 const STEPS = ["Select file", "Converting", "Save file"];
+
+function formatDuration(seconds) {
+  if (seconds == null) return "";
+  const s = Math.max(0, Math.floor(seconds));
+  const m = Math.floor(s / 60);
+  return `${m}:${String(s % 60).padStart(2, "0")}`;
+}
 
 /**
  * The complete converter flow: file drop zone, type validation, real
@@ -29,13 +36,28 @@ export function ConverterBox({ converter }) {
   const [result, setResult] = useState(null);
   const [saved, setSaved] = useState(false);
   const [dragging, setDragging] = useState(false);
+  const [elapsed, setElapsed] = useState(null);
+  const [took, setTook] = useState(null);
+  const startedAtRef = useRef(null);
   const inputId = useId();
+
+  useEffect(() => {
+    if (status !== "working") return undefined;
+    const id = setInterval(() => {
+      if (startedAtRef.current) {
+        setElapsed((Date.now() - startedAtRef.current) / 1000);
+      }
+    }, 500);
+    return () => clearInterval(id);
+  }, [status]);
 
   function pickFile(next) {
     if (!next) return;
     setError(null);
     setResult(null);
     setSaved(false);
+    setElapsed(null);
+    setTook(null);
 
     const ext = `.${(next.name.split(".").pop() || "").toLowerCase()}`;
     if (!converter.accepts.includes(ext)) {
@@ -67,11 +89,15 @@ export function ConverterBox({ converter }) {
     setStatus("working");
     setError(null);
     setProgress(null);
+    setTook(null);
+    startedAtRef.current = Date.now();
+    setElapsed(0);
     try {
       const response = await convertVideo(file, converter, {
         onStage: setStage,
         onProgress: setProgress,
       });
+      setTook((Date.now() - startedAtRef.current) / 1000);
       setResult(response);
       setStatus("ready");
     } catch (err) {
@@ -91,6 +117,8 @@ export function ConverterBox({ converter }) {
     setProgress(null);
     setError(null);
     setResult(null);
+    setElapsed(null);
+    setTook(null);
   }
 
   function reset() {
@@ -101,6 +129,8 @@ export function ConverterBox({ converter }) {
     setError(null);
     setResult(null);
     setSaved(false);
+    setElapsed(null);
+    setTook(null);
   }
 
   function save() {
@@ -120,11 +150,17 @@ export function ConverterBox({ converter }) {
       ? "Loading engine..."
       : stage === "reading"
         ? "Reading file..."
-        : stage === "converting"
-          ? pct != null
-            ? `${converter.convertingLabel.replace("...", "")} · ${pct}%`
-            : converter.convertingLabel
-          : "Working...";
+        : stage === "probing"
+          ? "Inspecting file..."
+          : stage === "converting"
+            ? pct != null
+              ? `${converter.convertingLabel.replace("...", "")} · ${pct}%`
+              : converter.convertingLabel
+            : "Working...";
+  const eta =
+    pct != null && pct >= 3 && elapsed != null && elapsed > 1
+      ? (elapsed * (100 - pct)) / pct
+      : null;
 
   const flow =
     status === "working"
@@ -236,6 +272,11 @@ export function ConverterBox({ converter }) {
             <p className="flex min-w-0 items-center gap-2 font-mono text-xs text-muted">
               <span className="h-1.5 w-1.5 shrink-0 animate-pulse rounded-full bg-accent" />
               <span className="truncate">{stageLabel}</span>
+              {elapsed != null && (
+                <span className="shrink-0 tabular-nums text-faint">
+                  {formatDuration(elapsed)}
+                </span>
+              )}
             </p>
             <button
               type="button"
@@ -247,7 +288,7 @@ export function ConverterBox({ converter }) {
           </div>
           {stage === "loading" && (
             <p className="mt-2 font-mono text-[11px] text-faint">
-              first run downloads the engine (~31 MB) — cached for next time
+              first run loads the engine (~31 MB) — cached for next time
             </p>
           )}
           {stage === "converting" && pct != null && (
@@ -257,6 +298,11 @@ export function ConverterBox({ converter }) {
                 style={{ width: `${pct}%` }}
               />
             </div>
+          )}
+          {eta != null && (
+            <p className="mt-2 font-mono text-[11px] tabular-nums text-faint">
+              ~{formatDuration(eta)} remaining
+            </p>
           )}
           <div className="mt-5">
             <DownloadState
@@ -281,6 +327,7 @@ export function ConverterBox({ converter }) {
                 </p>
                 <p className="mt-0.5 font-mono text-[11px] text-faint">
                   processed locally · nothing was uploaded
+                  {took != null && ` · took ${formatDuration(took)}`}
                 </p>
               </div>
             </div>
