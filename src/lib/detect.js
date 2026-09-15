@@ -27,6 +27,13 @@ export function detectPlatform(raw) {
 
   const host = url.hostname.toLowerCase().replace(/^www\./, "");
 
+  // Browsers tolerate gibberish the URL parser shouldn't accept (spaces
+  // become %20 instead of throwing), so reject hosts that can't be real
+  // platform domains: encoded characters or no dot at all.
+  if (/[% \t\n]/.test(host) || !host.includes(".")) {
+    return { error: "invalid" };
+  }
+
   for (const platform of platforms) {
     if (platform.domains.some((d) => host === d || host.endsWith(`.${d}`))) {
       return { platform, url: url.href };

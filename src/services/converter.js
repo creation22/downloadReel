@@ -8,13 +8,19 @@ import { FFmpeg } from "@ffmpeg/ffmpeg";
  * files never leave the device, which is exactly what the product
  * promises.
  *
+ * NOTE: the ESM core build is required, not UMD. @ffmpeg/ffmpeg always
+ * spawns its worker as `{ type: "module" }`, where `importScripts` does
+ * not exist — so the worker dynamic-imports the core and needs its
+ * default export, which only the ESM build provides. Passing the UMD
+ * build fails with "failed to import ffmpeg-core.js".
+ *
  *   await convertVideo(file, converter, { onStage, onProgress })
  *   -> { ok, real, blob, outputName, outputExt, outputSize, inputSize }
  */
 
 const FFMPEG_VERSION = "0.12.10";
 const CORE_VERSION = "0.12.10";
-const CORE_BASE = `https://unpkg.com/@ffmpeg/core@${CORE_VERSION}/dist/umd`;
+const CORE_BASE = `https://unpkg.com/@ffmpeg/core@${CORE_VERSION}/dist/esm`;
 const CORE_JS = `${CORE_BASE}/ffmpeg-core.js`;
 const CORE_WASM = `${CORE_BASE}/ffmpeg-core.wasm`;
 const WORKER_URL = `https://unpkg.com/@ffmpeg/ffmpeg@${FFMPEG_VERSION}/dist/umd/814.ffmpeg.js`;
