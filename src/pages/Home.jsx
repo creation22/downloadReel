@@ -24,6 +24,116 @@ const POPULAR_IDS = [
 const metaChip =
   "rounded border border-line bg-canvas px-2 py-0.5 font-mono text-[11px] text-faint";
 
+/**
+ * 3D-style social tiles floating in the hero background.
+ * Deliberately quiet: only 8 tiles, kept to the edges so the center
+ * column (badge → headline → search) stays clean and readable.
+ * - Asymmetric placement (never mirrored) for an organic feel.
+ * - Left tiles tilt right, right tiles tilt left — all facing the content.
+ * - Blurred back-layer tiles add depth of field; crisp front tiles lead.
+ */
+const HERO_3D_TILES = [
+  // ---- back layer: small, faint, slightly out of focus ----
+  {
+    slug: "vimeo",
+    size: 34,
+    pos: "left-[4%] top-[24%]",
+    tile: "bg-[linear-gradient(135deg,#3ecbf2,#0d7fa8)]",
+    tilt: "perspective(700px) rotateY(-12deg) rotateX(8deg)",
+    opacity: "opacity-30",
+    blur: "blur-[1.5px]",
+    delay: "2.8s",
+    duration: "8.4s",
+    hide: "max-md:hidden",
+  },
+  {
+    slug: "reddit",
+    size: 36,
+    pos: "bottom-[12%] left-[6%]",
+    tile: "bg-[linear-gradient(135deg,#ff6a2b,#c93a00)]",
+    tilt: "perspective(700px) rotateY(-12deg) rotateX(8deg)",
+    opacity: "opacity-30",
+    blur: "blur-[1.5px]",
+    delay: "0.4s",
+    duration: "8s",
+    hide: "max-md:hidden",
+  },
+  {
+    slug: "twitch",
+    size: 34,
+    pos: "bottom-[16%] right-[5%]",
+    tile: "bg-[linear-gradient(135deg,#a970ff,#5f24c9)]",
+    tilt: "perspective(700px) rotateY(12deg) rotateX(8deg)",
+    opacity: "opacity-30",
+    blur: "blur-[1.5px]",
+    delay: "3.4s",
+    duration: "7.8s",
+    hide: "max-md:hidden",
+  },
+  // ---- front layer: crisp, medium, leading the eye to the search ----
+  {
+    slug: "instagram",
+    size: 46,
+    pos: "left-[13%] top-[30%]",
+    tile: "bg-[linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888)]",
+    tilt: "perspective(700px) rotateY(-12deg) rotateX(8deg)",
+    opacity: "opacity-55 max-sm:opacity-30",
+    blur: "",
+    delay: "0s",
+    duration: "7s",
+    hide: "",
+  },
+  {
+    slug: "tiktok",
+    size: 52,
+    pos: "left-[9%] top-[58%]",
+    tile: "bg-[linear-gradient(135deg,#333338,#010101)]",
+    tilt: "perspective(700px) rotateY(-12deg) rotateX(8deg)",
+    opacity: "opacity-60",
+    blur: "",
+    delay: "0.8s",
+    duration: "7.6s",
+    hide: "max-sm:hidden",
+  },
+  {
+    slug: "facebook",
+    size: 50,
+    pos: "right-[12%] top-[38%]",
+    tile: "bg-[linear-gradient(135deg,#2f8bff,#0d4fb0)]",
+    tilt: "perspective(700px) rotateY(12deg) rotateX(8deg)",
+    opacity: "opacity-60 max-sm:opacity-30",
+    blur: "",
+    delay: "2.2s",
+    duration: "6.8s",
+    hide: "",
+  },
+  {
+    slug: "x",
+    size: 54,
+    pos: "right-[8%] top-[62%]",
+    tile: "bg-[linear-gradient(135deg,#2e2e33,#000000)]",
+    tilt: "perspective(700px) rotateY(12deg) rotateX(8deg)",
+    opacity: "opacity-60",
+    blur: "",
+    delay: "1.6s",
+    duration: "6.4s",
+    hide: "max-sm:hidden",
+  },
+  {
+    slug: "snapchat",
+    size: 40,
+    pos: "bottom-[10%] right-[18%]",
+    tile: "bg-[linear-gradient(135deg,#fff86b,#e0d000)]",
+    tilt: "perspective(700px) rotateY(12deg) rotateX(8deg)",
+    opacity: "opacity-50",
+    blur: "",
+    delay: "2.6s",
+    duration: "7.4s",
+    hide: "max-sm:hidden",
+    darkGlyph: true,
+  },
+];
+
 export default function Home() {
   usePageMeta({
     title: "DownloadReel — download, convert and edit videos in your browser",
@@ -40,28 +150,46 @@ export default function Home() {
     <>
       {/* Hero */}
       <section className="relative overflow-hidden pb-12 pt-14 sm:pb-14 sm:pt-20">
-        {/* social platform SVGs scattered in hero background */}
+        {/* 3D social tiles floating in the hero background */}
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute inset-0"
+          className="pointer-events-none absolute inset-0 [mask-image:linear-gradient(180deg,transparent,black_12%,black_88%,transparent)]"
         >
-          <PlatformIcon slug="instagram" size={34} className="absolute left-[6%] top-[12%] -rotate-12 opacity-[0.16]" />
-          <PlatformIcon slug="tiktok" size={30} className="absolute right-[8%] top-[10%] rotate-12 opacity-[0.16]" />
-          <PlatformIcon slug="x" size={54} className="absolute left-[21%] top-[56%] rotate-6 opacity-[0.24]" />
-          <PlatformIcon slug="facebook" size={56} className="absolute right-[21%] top-[56%] -rotate-6 opacity-[0.24]" />
-          <PlatformIcon slug="reddit" size={28} className="absolute bottom-[16%] left-[8%] rotate-12 opacity-[0.14]" />
-          <PlatformIcon slug="pinterest" size={26} className="absolute bottom-[18%] right-[9%] -rotate-12 opacity-[0.14]" />
-          <PlatformIcon slug="vimeo" size={30} className="absolute left-[22%] top-[8%] rotate-6 opacity-10 max-sm:hidden" />
-          <PlatformIcon slug="twitch" size={28} className="absolute right-[22%] top-[6%] -rotate-6 opacity-10 max-sm:hidden" />
-          <PlatformIcon slug="threads" size={24} className="absolute bottom-[30%] left-[4%] -rotate-6 opacity-10 max-md:hidden" />
-          <PlatformIcon slug="snapchat" size={26} className="absolute bottom-[32%] right-[4%] rotate-6 opacity-10 max-md:hidden" />
-          <PlatformIcon slug="linkedin" size={24} className="absolute left-[30%] top-[22%] -rotate-12 opacity-[0.08] max-lg:hidden" />
+          {HERO_3D_TILES.map((t) => (
+            <span
+              key={t.slug}
+              className={`absolute animate-float-soft ${t.pos} ${t.hide}`}
+              style={{ animationDelay: t.delay, animationDuration: t.duration }}
+            >
+              <span
+                className={`relative flex items-center justify-center rounded-[14px] border border-white/25 shadow-[0_18px_40px_-12px_rgba(0,0,0,0.55)] ${t.tile} ${t.opacity} ${t.blur || ""}`}
+                style={{ width: t.size, height: t.size, transform: t.tilt }}
+              >
+                {/* top gloss */}
+                <span className="pointer-events-none absolute inset-0 rounded-[14px] bg-[linear-gradient(180deg,rgba(255,255,255,0.38),transparent_46%)]" />
+                {/* bottom shade for depth */}
+                <span className="pointer-events-none absolute inset-0 rounded-[14px] bg-[linear-gradient(0deg,rgba(0,0,0,0.22),transparent_42%)]" />
+                {/* platform glyph in white (black on snapchat's yellow tile) */}
+                <span
+                  className="absolute inset-0 flex items-center justify-center"
+                  style={{
+                    filter: t.darkGlyph
+                      ? "brightness(0)"
+                      : "brightness(0) invert(1)",
+                    opacity: 0.95,
+                  }}
+                >
+                  <PlatformIcon slug={t.slug} size={Math.round(t.size * 0.52)} />
+                </span>
+              </span>
+            </span>
+          ))}
         </div>
         <Container className="relative">
           <div className="mx-auto max-w-3xl text-center">
             <p className="animate-fade-up inline-flex items-center gap-2 rounded-full border border-line bg-surface px-3 py-1 font-mono text-[11px] text-muted">
               <span className="h-1.5 w-1.5 rounded-full bg-accent" />
-              open source · local processing
+              local processing
             </p>
             <h1 className="animate-fade-up [animation-delay:60ms] mt-5 font-display text-[34px] font-extrabold leading-[1.05] tracking-tight text-fg sm:text-[52px] sm:leading-[1.0] lg:text-[74px] lg:leading-[70px]">
               Everything you need to{" "}
