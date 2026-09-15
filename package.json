@@ -7,9 +7,14 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "api": "node server/index.mjs"
+    "api": "node server/index.mjs",
+    "postinstall": "node scripts/prepare-ffmpeg.mjs",
+    "predev": "node scripts/prepare-ffmpeg.mjs",
+    "prebuild": "node scripts/prepare-ffmpeg.mjs",
+    "prepreview": "node scripts/prepare-ffmpeg.mjs"
   },
   "dependencies": {
+    "@ffmpeg/core": "0.12.10",
     "@ffmpeg/ffmpeg": "^0.12.10",
     "lucide-react": "^0.544.0",
     "react": "^19.1.0",
